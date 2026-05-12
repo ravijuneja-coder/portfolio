@@ -53,6 +53,7 @@ const GlobalStyles = ({ dark }) => (
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+      .overflow-visible { overflow: visible !important; }
     .marquee-track {
       display: flex; gap: 2.5rem;
       animation: marquee 28s linear infinite;
@@ -318,7 +319,7 @@ const Hero = ({ dark }) => {
               </motion.h1>
             ))}
 
-            <div style={{ height:"clamp(2.5rem,5.5vw,5rem)",overflow:"hidden",marginBottom:"0.2rem" }}>
+            <div  className="overflow-visible" style={{ height:"clamp(2.5rem,5.5vw,5rem)",marginBottom:"0.2rem" }}>
               <AnimatePresence mode="wait">
                 <motion.h1 key={wIdx} className="gold-text"
                   initial={{ y:70,opacity:0 }} animate={{ y:0,opacity:1 }} exit={{ y:-70,opacity:0 }}
@@ -349,16 +350,60 @@ const Hero = ({ dark }) => {
               </button>
             </motion.div>
 
-            <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} transition={{ delay:1.1 }}
-              style={{ display:"flex",gap:"1.25rem",alignItems:"center" }}>
-              {[{l:"LinkedIn",icon:"in"},{l:"Behance",icon:"Bē"},{l:"Dribbble",icon:"◎"}].map(s=>(
-                <a key={s.l} href="#" title={s.l} style={{ width:38,height:38,borderRadius:"50%",border:"1.5px solid var(--border)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"0.72rem",fontFamily:"Poppins,sans-serif",fontWeight:700,color:"var(--muted)",textDecoration:"none",transition:"all 0.3s" }}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor="#b8924a";e.currentTarget.style.color="#b8924a";e.currentTarget.style.boxShadow="0 0 18px rgba(184,146,74,0.2)";}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor="var(--border)";e.currentTarget.style.color="var(--muted)";e.currentTarget.style.boxShadow="none";}}>
-                  {s.icon}
-                </a>
-              ))}
-            </motion.div>
+            <motion.div
+  initial={{ opacity:0 }}
+  animate={{ opacity:1 }}
+  transition={{ delay:1.1 }}
+  style={{ display:"flex",gap:"1.25rem",alignItems:"center" }}
+>
+  {[
+    {
+      l:"LinkedIn",
+      icon:"in",
+      url:"https://www.linkedin.com/in/ravi-juneja/"
+    },
+    {
+      l:"Behance",
+      icon:"Bē",
+      url:"https://www.behance.net/ravijuneja4b4d"
+    }
+  ].map(s=>(
+    <a
+      key={s.l}
+      href={s.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={s.l}
+      style={{
+        width:38,
+        height:38,
+        borderRadius:"50%",
+        border:"1.5px solid var(--border)",
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"center",
+        fontSize:"0.72rem",
+        fontFamily:"Poppins,sans-serif",
+        fontWeight:700,
+        color:"var(--muted)",
+        textDecoration:"none",
+        transition:"all 0.3s"
+      }}
+      onMouseEnter={e=>{
+        e.currentTarget.style.borderColor="#b8924a";
+        e.currentTarget.style.color="#b8924a";
+        e.currentTarget.style.boxShadow="0 0 18px rgba(184,146,74,0.2)";
+      }}
+      onMouseLeave={e=>{
+        e.currentTarget.style.borderColor="var(--border)";
+        e.currentTarget.style.color="var(--muted)";
+        e.currentTarget.style.boxShadow="none";
+      }}
+    >
+      {s.icon}
+    </a>
+  ))}
+</motion.div>
           </div>
 
           {/* Photo — big editorial hero */}
@@ -446,7 +491,7 @@ const projects = [
     desc: "Complete end-to-end redesign of a healthcare SaaS platform serving 200K+ patients. Led UX research, user flows, and a 14-month design sprint that reduced task completion time by 42% and increased daily active users by 68%.",
     tags: ["Healthcare","SaaS","UX Research","Design System"],
     color: "#0d1f18", accent: "#4ade80", emoji: "🏥",
-    year: "2023", role: "Lead UX Designer",
+    year: "2023", role: "Lead UX Designer", caseStudyUrl: "#",
   },
   {
     id: 2,
@@ -454,7 +499,7 @@ const projects = [
     desc: "Real-time financial analytics dashboard with complex data visualization for enterprise clients. Designed an intuitive information architecture handling 50+ data streams, resulting in 85% user satisfaction and a 3-min reduction in average analysis time.",
     tags: ["Dashboard","Fintech","Data Viz","UI Design"],
     color: "#0d1218", accent: "#60a5fa", emoji: "📊",
-    year: "2023", role: "Product Designer",
+    year: "2023", role: "Product Designer", caseStudyUrl: "#",
   },
   {
     id: 3,
@@ -462,7 +507,7 @@ const projects = [
     desc: "AI-powered mental wellness super-app with mood tracking, journaling, and personalized therapy suggestions. Designed for iOS & Android with a calm, accessible UI achieving 4.9★ on App Store and 1.2M downloads.",
     tags: ["Mobile App","iOS","Mental Health","Product Design"],
     color: "#180d1f", accent: "#c084fc", emoji: "🧠",
-    year: "2022", role: "Senior UI/UX Designer",
+    year: "2022", role: "Senior UI/UX Designer", caseStudyUrl: "#",
   },
   {
     id: 4,
@@ -470,7 +515,7 @@ const projects = [
     desc: "High-conversion checkout flow redesign for a leading Indian e-commerce platform. Applied behavioural psychology principles, progressive disclosure, and micro-interactions — resulting in 67% checkout completion increase and ₹2Cr/month additional revenue.",
     tags: ["E-Commerce","CRO","UX Strategy","Design System"],
     color: "#1f150d", accent: "#fb923c", emoji: "🛍️",
-    year: "2022", role: "UX Lead",
+    year: "2022", role: "UX Lead", caseStudyUrl: "#",
   },
   {
     id: 5,
@@ -478,7 +523,7 @@ const projects = [
     desc: "Built a comprehensive design system with 800+ components for a Fortune 500 company. Established design tokens, accessibility guidelines, motion language, and documentation — adopted across 14 product teams, cutting design-to-dev handoff time by 55%.",
     tags: ["Design System","B2B","Scalability","Documentation"],
     color: "#0d1218", accent: "#818cf8", emoji: "⚡",
-    year: "2021", role: "Design Systems Lead",
+    year: "2021", role: "Design Systems Lead", caseStudyUrl: "#",
   },
 ];
 
@@ -722,11 +767,12 @@ const FeaturedCard = ({ project }) => {
               <div style={{ fontSize:"0.6rem",letterSpacing:"0.2em",color:"var(--muted)",fontFamily:"Poppins,sans-serif",marginBottom:"0.3rem",textTransform:"uppercase" }}>Role</div>
               <div style={{ fontFamily:"Poppins,sans-serif",fontWeight:600,fontSize:"0.9rem",color:"var(--white)" }}>{project.role}</div>
             </div>
-            <button style={{ padding:"0.85rem 2.2rem",borderRadius:100,background:`${project.accent}22`,border:`1.5px solid ${project.accent}50`,color:project.accent,fontSize:"0.82rem",fontFamily:"Poppins,sans-serif",fontWeight:700,transition:"all 0.3s",whiteSpace:"nowrap" }}
+            <a href={project.caseStudyUrl} target="_blank" rel="noopener noreferrer"
+              style={{ display:"inline-block",padding:"0.85rem 2.2rem",borderRadius:100,background:`${project.accent}22`,border:`1.5px solid ${project.accent}50`,color:project.accent,fontSize:"0.82rem",fontFamily:"Poppins,sans-serif",fontWeight:700,transition:"all 0.3s",whiteSpace:"nowrap",textDecoration:"none",cursor:"pointer" }}
               onMouseEnter={e=>{e.currentTarget.style.background=project.accent;e.currentTarget.style.color="#07070a";e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.boxShadow=`0 16px 40px ${project.accent}40`;}}
               onMouseLeave={e=>{e.currentTarget.style.background=`${project.accent}22`;e.currentTarget.style.color=project.accent;e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow="none";}}>
               View Case Study →
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -758,11 +804,12 @@ const ProjectCard = ({ project, index }) => {
           </div>
           <div style={{ marginTop:"1.75rem",display:"flex",justifyContent:"space-between",alignItems:"center" }}>
             <span style={{ fontSize:"0.68rem",color:"var(--muted)",fontFamily:"Poppins,sans-serif",fontWeight:500,letterSpacing:"0.1em" }}>{project.role}</span>
-            <button style={{ padding:"0.6rem 1.4rem",borderRadius:100,background:`${project.accent}18`,border:`1px solid ${project.accent}40`,color:project.accent,fontSize:"0.75rem",fontFamily:"Poppins,sans-serif",fontWeight:600,transition:"all 0.3s" }}
+            <a href={project.caseStudyUrl} target="_blank" rel="noopener noreferrer"
+              style={{ display:"inline-block",padding:"0.6rem 1.4rem",borderRadius:100,background:`${project.accent}18`,border:`1px solid ${project.accent}40`,color:project.accent,fontSize:"0.75rem",fontFamily:"Poppins,sans-serif",fontWeight:600,transition:"all 0.3s",textDecoration:"none",cursor:"pointer" }}
               onMouseEnter={e=>{e.currentTarget.style.background=project.accent;e.currentTarget.style.color="#07070a";e.currentTarget.style.transform="translateY(-2px)";}}
               onMouseLeave={e=>{e.currentTarget.style.background=`${project.accent}18`;e.currentTarget.style.color=project.accent;e.currentTarget.style.transform="none";}}>
               View Case Study →
-            </button>
+            </a>
           </div>
         </div>
         {!isEven && <ProjectVisual project={project} big={false} />}
